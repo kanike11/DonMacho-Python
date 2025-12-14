@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Your Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[#f1f1f1] text-gray-800 font-sans">
+    <div id="siteHeader"></div>
+
+
+    <!-- CART CONTENT -->
+    <main class="mx-auto max-w-5xl px-6 py-8">
+
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+            <!-- header row -->
+            <div class="flex items-center justify-between px-8 py-6 border-b">
+                <h1 class="text-xl font-extrabold tracking-wide">YOUR ORDER</h1>
+
+                <div class="flex items-center gap-3">
+                    <button type="button" onclick="window.location.href='{% url 'menu' %}'"
+
+                        class="h-10 px-4 rounded-xl bg-gray-100 font-bold hover:bg-gray-200">
+                        Back
+                    </button>
+
+                    <button type="button" onclick="clearCartPage()" class="h-10 px-4 rounded-xl bg-black text-white font-bold
+                   hover:bg-white hover:text-black hover:border hover:border-black transition">
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+            <!-- items -->
+            <div class="px-8 py-6">
+                <div id="cartItems" class="rounded-2xl border border-gray-100 overflow-hidden bg-white">
+                    <!-- injected -->
+                </div>
+            </div>
+
+            <!-- footer -->
+            <div class="px-8 py-6 border-t flex items-center justify-between">
+                <div class="text-lg font-extrabold">
+                    Total: <span id="cartTotalText">₱0.00</span>
+                </div>
+
+                <button id="cartCheckoutBtn" type="button" class="h-12 px-8 rounded-2xl bg-black text-white font-semibold shadow
+                 transition-all duration-200 hover:bg-white hover:text-black hover:border hover:border-black">
+                    PROCEED TO CHECKOUT
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="{% static 'myprojects/JS/Cartpage.js' %}"></script>
+
+    <!--<script src="/core/js/include-header.js"></script> -->
+</body>
+
+</html>

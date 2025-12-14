@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Don Machos{% endblock %}</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-[#F4F4F4] font-outfit flex flex-col w-[1000px] m-auto min-h-screen select-none cursor-pointer">
+
+
+  {% block content %}
+  <h1 class="mt-20 h-32 text-black text-6xl font-bold text-center">
+    ORDER AND PAY HERE
+  </h1>
+
+  <div class="flex flex-row items-center justify-center space-x-8 w-full">
+
+  <!-- LOGO COLUMN -->
+  <div class="flex flex-col text-left ml-20 mt-36 flex-1">
+    <img class="w-[350px]" src="{% static 'myprojects/images/logodonmachos.png' %}">
+    <h1 class="text-[25px] font-medium mt-4">WELCOME TO DON MACHOS</h1>
+  </div>
+
+  <!-- CUP COLUMN -->
+  <div class="flex flex-col mt-12 flex-1">
+    <img class="w-full object-contain" src="{% static 'myprojects/images/Cupwithhand.png' %}">
+  </div>
+
+</div>
+
+
+  <div class="ml-20">
+    <h1 class="text-[70px] font-bold">Your Cup of</h1>
+    <h1 class="text-[70px] font-bold">Happiness</h1>
+    <p class="text-[25px] mt-5">THE PERFECT CUP, THE PERFECT VIBE.</p>
+    <p class="text-[25px]">COME EXPERIENCE THE DON MACHOS COMMUNITY.</p>
+  </div>
+
+  <div class="mt-auto w-[150wh] bg-black py-8 text-center">
+    <h1 class="text-white text-[50px] font-bold">
+      TAP ANYWHERE TO BEGIN
+    </h1>
+  </div>
+    
+
+  <script>
+    document.addEventListener("click", function () {
+      window.location.href = "{% url 'myprojects:order_type' %}";
+    });
+  </script>
+  {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Don Machos Menu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[#f1f1f1] text-gray-800 font-sans">
+  <div id="siteHeader" class="relative z-0 pointer-events-none"></div>
+
+  
+<main class="relative z-10 pointer-events-auto mx-auto max-w-6xl px-6 py-6">
+
+    <h2 class="text-5xl text-black font-extrabold mb-6">DON MACHOS MENU</h2>
+
+    <div class="flex gap-8">
+      <!-- SIDEBAR -->
+      <aside class="w-48 shrink-0">
+        <div class="bg-white rounded-3xl p-4 shadow-sm text-center">
+          <h3 class="text-xl font-extrabold mb-2">Menu</h3>
+          <hr class="border-gray-200 mb-4" />
+
+          <div class="flex flex-col items-center mb-6">
+            <div class="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center font-bold text-sm">NEW</div>
+            <p class="mt-2 text-sm font-medium text-black">What's New</p>
+          </div>
+
+          <div class="max-h-[calc(100vh-220px)] overflow-y-auto overscroll-contain">
+            <nav class="flex flex-col items-center gap-6 pb-4">
+              <button class="flex flex-col items-center gap-2 focus:outline-none" type="button">
+                <img src="{% static 'myprojects/images/Caramelmachiatos.svg' %}" alt="Coffee" class="w-20 h-20 object-contain" />
+                <span class="text-sm font-medium">Coffee</span>
+              </button>
+
+              <button type="button" disabled class="flex flex-col items-center gap-2 opacity-40 cursor-not-allowed">
+                <img src="{% static 'myprojects/images/Frappe.png' %}" alt="Frappe" class="w-20 h-20 object-contain" />
+                <span class="text-sm font-medium">Frappe</span>
+                <span class="text-[10px] font-bold tracking-wide text-gray-500">AVAILABLE SOON</span>
+              </button>
+
+              <button type="button" disabled class="flex flex-col items-center gap-2 opacity-40 cursor-not-allowed">
+                <img src="{% static 'myprojects/images/cookies.png' %}" alt="Cookies" class="w-20 h-20 object-contain" />
+                <span class="text-sm font-medium">Cookies</span>
+                <span class="text-[10px] font-bold tracking-wide text-gray-500">AVAILABLE SOON</span>
+              </button>
+            </nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MENU GRID -->
+      <section class="flex-1">
+        <div class="bg-white p-6 rounded-3xl shadow-sm">
+          <div class="h-[calc(60vh-128px)] overflow-y-auto pr-2">
+            <div class="grid grid-cols-3 gap-6">
+
+              <!-- ✅ FIXED onclick quotes -->
+              <button type="button"
+                onclick="openProductModal(
+                  'Caramel Macchiatos',
+                  '{% static 'myprojects/images/Caramelmachiatos.svg' %}',
+                  'Chilled milk, espresso, and caramel syrup.'
+                )"
+                class="w-full text-left rounded-2xl p-4 flex items-center gap-4 bg-[#F7F7F7]
+                       hover:bg-[#EFEFEF] active:scale-[0.99] transition
+                       focus:outline-none focus-visible:ring-2 focus-visible:ring-black/40">
+                <img src="{% static 'myprojects/images/Caramelmachiatos.svg' %}" alt="Caramel Macchiato"
+                     class="w-24 h-24 object-contain shrink-0" />
+                <div class="flex-1">
+                  <h4 class="text-base font-extrabold leading-snug uppercase">Caramel<br />Macchiatos</h4>
+                  <p class="text-sm text-gray-500 mt-1">Chilled milk, espresso, and caramel syrup.</p>
+                  <p class="text-xl font-extrabold mt-3">₱39</p>
+                </div>
+              </button>
+
+              <button type="button"
+                onclick="openProductModal(
+                  'Don Darko',
+                  '{% static 'myprojects/images/DonDarko.svg' %}',
+                  'High-quality dark chocolate, chocolate syrup'
+                )"
+                class="w-full text-left rounded-2xl p-4 flex items-center gap-4 bg-[#F7F7F7]
+                       hover:bg-[#EFEFEF] active:scale-[0.99] transition
+                       focus:outline-none focus-visible:ring-2 focus-visible:ring-black/40">
+                <img src="{% static 'myprojects/images/DonDarko.svg' %}" alt="Don Darko"
+                     class="w-24 h-24 object-contain shrink-0" />
+                <div class="flex-1">
+                  <h4 class="text-base font-extrabold leading-snug uppercase">Don<br />Darko</h4>
+                  <p class="text-sm text-gray-500 mt-1">High-quality dark chocolate, chocolate syrup</p>
+                  <p class="text-xl font-extrabold mt-3">₱39</p>
+                </div>
+              </button>
+
+              <button type="button"
+                onclick="openProductModal(
+                  'Black Forest',
+                  '{% static 'myprojects/images/10 3.png' %}',
+                  'Belgian dark chocolate, sweet strawberries, and milk.'
+                )"
+                class="w-full text-left rounded-2xl p-4 flex items-center gap-4 bg-[#F7F7F7]
+                       hover:bg-[#EFEFEF] active:scale-[0.99] transition
+                       focus:outline-none focus-visible:ring-2 focus-visible:ring-black/40">
+                <img src="{% static 'myprojects/images/10 3.png' %}" alt="Black Forest"
+                     class="w-24 h-24 object-contain shrink-0" />
+                <div class="flex-1">
+                  <h4 class="text-base font-extrabold leading-snug uppercase">Black<br />Forest</h4>
+                  <p class="text-sm text-gray-500 mt-1">Belgian dark chocolate, sweet strawberries, and milk.</p>
+                  <p class="text-xl font-extrabold mt-3">₱39</p>
+                </div>
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ORDER PANEL -->
+    <div class="mt-6 bg-white shadow-lg rounded-3xl px-8 py-7">
+      <div class="flex items-start justify-between">
+        <h3 class="text-xl font-extrabold tracking-wide">YOUR ORDER</h3>
+
+        <!-- (optional) change to Django url later -->
+        <button type="button" onclick="window.location.href='/cart/'"
+          class="px-6 py-2.5 rounded-full bg-black text-white text-sm font-semibold shadow
+                 border-2 border-black hover:bg-white hover:text-black transition-colors duration-200">
+          VIEW CART
+        </button>
+      </div>
+
+      <div id="orderItems" class="mt-4 rounded-2xl bg-white border border-gray-100 overflow-hidden">
+        <div id="orderItemsList" class="max-h-[140px] overflow-y-auto"></div>
+      </div>
+
+      <div class="mt-5 grid grid-cols-3 items-center gap-6">
+        <button type="button" onclick="clearCart()"
+          class="h-14 rounded-2xl bg-white border border-gray-300 font-semibold shadow-sm
+                 hover:bg-black hover:text-white hover:border-black transition">
+          CLEAR
+        </button>
+
+        <button id="checkoutBtn"
+          class="h-14 rounded-2xl bg-gray-200 text-gray-400 font-semibold tracking-wide cursor-not-allowed"
+          type="button" disabled>
+          PROCEED TO CHECKOUT
+        </button>
+
+        <div class="h-14 rounded-2xl bg-white border border-gray-300 flex flex-col items-center justify-center">
+          <div class="text-xs font-medium tracking-wide">ORDER TOTAL</div>
+          <div id="orderTotalBox" class="text-xl font-semibold">₱0.00</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ✅ MODAL (pointer-events-none prevents blocking clicks when hidden) -->
+  <div id="productModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 pointer-events-none">
+    <div onclick="closeProductModal()" class="absolute inset-0 bg-black/40 backdrop-blur-lg pointer-events-auto"></div>
+
+    <div class="relative w-[520px] max-w-[95%] rounded-3xl bg-[#f3f3f3] p-6 shadow-2xl pointer-events-auto"
+         onclick="event.stopPropagation()">
+
+      <div class="grid grid-cols-[170px_1fr] gap-5">
+        <div class="rounded-2xl bg-white p-3 ring-2 ring-black">
+          <img id="modalImage" src="" alt="Drink" class="h-[170px] w-full object-contain" />
+        </div>
+
+        <div>
+          <h2 id="modalTitle" class="text-3xl mt-8 font-black uppercase leading-none"></h2>
+          <p id="modalDesc" class="mt-2 text-[18px] leading-snug text-gray-400"></p>
+          <div id="modalPrice" class="mt-2 text-4xl font-black">₱69</div>
+        </div>
+      </div>
+
+      <div class="mt-5 grid grid-cols-2 gap-6">
+        <div>
+          <div class="text-lg font-extrabold">Mood</div>
+          <div class="mt-2 flex items-center gap-3">
+            <button id="moodHot" type="button" onclick="setMood('hot')" class="h-14 w-14 rounded-full bg-[#e9e9e9] flex items-center justify-center border border-transparent">🔥</button>
+            <button id="moodCold" type="button" onclick="setMood('cold')" class="h-14 w-14 rounded-full bg-[#e9e9e9] flex items-center justify-center border border-transparent">❄️</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-lg font-extrabold">Size</div>
+          <div class="mt-2 flex items-center gap-3">
+            <button id="sizeS" type="button" onclick="setSize('S')" class="w-12 rounded-full bg-[#e9e9e9] py-2 text-center border border-transparent">
+              <div class="text-sm font-black">S</div><div class="text-[12px] font-semibold text-gray-500">₱39</div>
+            </button>
+            <button id="sizeM" type="button" onclick="setSize('M')" class="w-12 rounded-full bg-[#e9e9e9] py-2 text-center border border-transparent">
+              <div class="text-sm font-black">M</div><div class="text-[12px] font-semibold text-gray-500">₱69</div>
+            </button>
+            <button id="sizeL" type="button" onclick="setSize('L')" class="w-12 rounded-full bg-[#e9e9e9] py-2 text-center border border-transparent">
+              <div class="text-sm font-black">L</div><div class="text-[12px] font-semibold text-gray-500">₱99</div>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-lg font-extrabold">Sugar</div>
+          <div class="mt-2 flex items-center gap-3">
+            <button id="sugar25" type="button" onclick="setSugar('25%')" class="rounded-full bg-[#e9e9e9] px-4 py-2 text-sm font-black text-gray-600 border border-transparent">25%</button>
+            <button id="sugar50" type="button" onclick="setSugar('50%')" class="rounded-full bg-[#e9e9e9] px-4 py-2 text-sm font-black text-gray-600 border border-transparent">50%</button>
+            <button id="sugar75" type="button" onclick="setSugar('75%')" class="rounded-full bg-[#e9e9e9] px-4 py-2 text-sm font-black text-gray-600 border border-transparent">75%</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="text-lg font-extrabold">Quantity</div>
+          <div class="mt-2 inline-flex items-center rounded-2xl bg-[#e9e9e9] overflow-hidden">
+            <button type="button" onclick="changeQty(-1)" class="h-10 w-12 font-black text-gray-700 hover:bg-black/5">-</button>
+            <div id="qty" class="h-10 w-12 text-center leading-10 font-black">1</div>
+            <button type="button" onclick="changeQty(1)" class="h-10 w-12 font-black text-gray-700 hover:bg-black/5">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-2 gap-4">
+        <button type="button" onclick="closeProductModal()" class="h-12 rounded-2xl bg-white text-black font-semibold shadow border border-gray-200 hover:bg-black hover:text-white hover:border-black">
+          Cancel
+        </button>
+        <button type="button" onclick="addToCart()" class="h-12 rounded-2xl bg-black text-white font-semibold shadow border-2 border-black hover:bg-white hover:text-black">
+          Add to Cart
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="{% static 'myprojects/JS/ProductModal.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Successful</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[#f7f7f7] flex flex-col items-center">
+
+    <!-- Header include -->
+    <div id="siteHeader" class="w-full"></div>
+
+    <!-- Content -->
+    <main class="w-full max-w-md px-6 py-16 mt-20 text-center">
+
+        <!-- Title -->
+        <h1 class="text-lg md:text-3xl font-bold mb-8">
+            Your order was successful.
+        </h1>
+
+        <!-- Order Card -->
+        <div class="bg-white rounded-xl px-6 py-8 mb-6 shadow-[0_4px_10px_rgba(0,0,0,0.15)]">
+            <p class="text-xl font-bold mb-2">
+                Your order number :
+            </p>
+            <p class="text-5xl font-black tracking-wide">
+                #0069
+            </p>
+        </div>
+
+        <!-- Note -->
+        <p class="text-sm text-gray-800 leading-snug mb-8">
+            Please get your receipt and wait your Order number<br />
+            to be called for collection.
+        </p>
+
+        <!-- Button -->
+        <a href="#" class="inline-block bg-black text-white font-extrabold text-lg px-12 py-4 rounded-xl shadow-lg
+         hover:bg-white hover:text-black hover:border-black
+         border-2 border-black
+         transition-colors duration-200
+         active:translate-y-0.5">
+            Back to Menu
+        </a>
+
+
+    </main>
+
+    <script src="/core/js/include-header.js"></script>
+</body>
+
+</html>
