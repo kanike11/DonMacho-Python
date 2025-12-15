@@ -1,9 +1,12 @@
 console.log("✅ CartPage.js loaded");
 
-let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+window.cart = window.cart ?? JSON.parse(localStorage.getItem("cart") || "[]");
+
+function getCart() { return window.cart; }
+function setCart(next) { window.cart = next; }
 
 function saveCart() {
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(getCart()));
 }
 
 function peso(n) {
@@ -13,6 +16,9 @@ function peso(n) {
 function renderCartPage() {
   const cartItems = document.getElementById("cartItems");
   const cartTotalText = document.getElementById("cartTotalText");
+  const cart = getCart();
+
+  if (!cartItems || !cartTotalText) return;
 
   if (!cart.length) {
     cartItems.innerHTML = `
@@ -49,22 +55,16 @@ function renderCartPage() {
             ${peso(lineTotal)}
           </div>
 
-          <!-- ✅ EDIT -->
-          <button
-            type="button"
+          <button type="button"
             onclick="editCartItem('${item.id}')"
-            class="h-10 px-4 rounded-xl bg-gray-100 font-bold hover:bg-gray-200"
-          >
+            class="h-10 px-4 rounded-xl bg-gray-100 font-bold hover:bg-gray-200">
             Edit
           </button>
 
-          <!-- ✅ DELETE -->
-          <button
-            type="button"
+          <button type="button"
             onclick="removeCartItem('${item.id}')"
             class="h-10 px-4 rounded-xl bg-black text-white font-bold
-                   hover:bg-white hover:text-black hover:border hover:border-black transition"
-          >
+                   hover:bg-white hover:text-black hover:border hover:border-black transition">
             Delete
           </button>
         </div>
@@ -77,29 +77,46 @@ function renderCartPage() {
 }
 
 function removeCartItem(id) {
-  cart = cart.filter(item => item.id !== id);
+  const next = getCart().filter(item => item.id !== id);
+  setCart(next);
   saveCart();
   renderCartPage();
 }
 
 function editCartItem(id) {
-  const item = cart.find(i => i.id === id);
+  const item = getCart().find(i => i.id === id);
   if (!item) return;
 
-  // ✅ store item to edit so Menupage.html can open the modal with this item
   localStorage.setItem("editItem", JSON.stringify(item));
-
-  // ✅ go back to menu page
+  localStorage.setItem("editReturn", "cart");
   window.location.href = "/menu/";
 
 }
 
 function clearCartPage() {
-  cart = [];
+  setCart([]);
   saveCart();
   localStorage.removeItem("editItem");
+  localStorage.removeItem("editReturn");
   renderCartPage();
 }
 
-// render on load
+function updateCartCheckoutBtn(cart) {
+  const btn = document.getElementById("cartCheckoutBtn");
+  if (!btn) return;
+
+  const hasItems = cart && cart.length > 0;
+
+  btn.disabled = !hasItems;
+  btn.className = hasItems
+    ? "h-14 w-full rounded-2xl bg-black text-white font-semibold tracking-wide shadow hover:bg-white hover:text-black hover:border hover:border-black transition"
+    : "h-14 w-full rounded-2xl bg-gray-200 text-gray-400 font-semibold tracking-wide cursor-not-allowed";
+}
+
+
 renderCartPage();
+
+// expose for inline onclick if needed
+window.editCartItem = editCartItem;
+window.removeCartItem = removeCartItem;
+window.clearCartPage = clearCartPage;

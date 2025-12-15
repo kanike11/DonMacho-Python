@@ -1279,3 +1279,34 @@ video {
 .w-screen {
   width: 100vw;
 }
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+.font-black {
+  font-weight: 900;
+}
+.btn-cancel {
+  @apply bg-[rgb(243,244,246)]
+         text-[rgb(17,24,39)]
+         border
+         border-[rgb(209,213,219)]
+         font-semibold
+         rounded-2xl
+         shadow-sm
+         transition
+         cursor-pointer;
+}
+
+.btn-cancel:hover {
+  @apply bg-[rgb(229,231,235)]
+         border-[rgb(156,163,175)];
+}

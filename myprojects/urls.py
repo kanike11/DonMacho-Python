@@ -1,3 +1,4 @@
+# myprojects/urls.py
 from django.urls import path
 from . import views
 
@@ -9,4 +10,6 @@ urlpatterns = [
     path("dine-in/", views.dinein, name="dinein"),
     path("take-out/", views.takeout, name="takeout"),
     path("menu/", views.menu, name="menu"),
+    path("cart/", views.cart, name="cart"),
+    path("payment-option/", views.payment_option, name="payment_option"),
 ]
