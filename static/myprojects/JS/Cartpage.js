@@ -1,32 +1,72 @@
-console.log("✅ CartPage.js loaded");
+console.log("✅ Cartpage.js loaded (Django session cart)");
 
-window.cart = window.cart ?? JSON.parse(localStorage.getItem("cart") || "[]");
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  return match ? decodeURIComponent(match[2]) : null;
+}
 
-function getCart() { return window.cart; }
-function setCart(next) { window.cart = next; }
+async function api(url, options = {}) {
+  const csrftoken = getCookie("csrftoken");
+  const res = await fetch(url, {
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+      ...(csrftoken ? { "X-CSRFToken": csrftoken } : {}),
+      ...(options.headers || {}),
+    },
+    ...options,
+  });
 
-function saveCart() {
-  localStorage.setItem("cart", JSON.stringify(getCart()));
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || "Request failed");
+  return data;
 }
 
 function peso(n) {
   return `₱${Number(n).toFixed(2)}`;
 }
 
-function renderCartPage() {
+function updateCartCheckoutBtn(cart) {
+  const btn = document.getElementById("cartCheckoutBtn");
+  if (!btn) return;
+
+  const hasItems = cart && cart.length > 0;
+  btn.disabled = !hasItems;
+
+  btn.className = hasItems
+    ? "h-12 px-8 rounded-2xl bg-black text-white font-semibold shadow transition-all duration-200 hover:bg-white hover:text-black hover:border hover:border-black"
+    : "h-12 px-8 rounded-2xl bg-gray-200 text-gray-400 font-semibold shadow cursor-not-allowed";
+}
+
+async function renderCartPage() {
   const cartItems = document.getElementById("cartItems");
   const cartTotalText = document.getElementById("cartTotalText");
-  const cart = getCart();
-
   if (!cartItems || !cartTotalText) return;
+
+  let data;
+  try {
+    data = await api(window.CART_API.get, { method: "GET" });
+  } catch (e) {
+    console.error("❌ Failed loading cart:", e);
+    cartItems.innerHTML = `
+      <div class="px-4 py-10 text-center text-sm text-gray-400">
+        Failed to load cart
+      </div>`;
+    cartTotalText.textContent = "₱0.00";
+    updateCartCheckoutBtn([]);
+    return;
+  }
+
+  const cart = data.cart || [];
+  console.log("🛒 Cart data from server:", cart); // ✅ DEBUG
 
   if (!cart.length) {
     cartItems.innerHTML = `
       <div class="px-4 py-10 text-center text-sm text-gray-400">
         No items yet
-      </div>
-    `;
+      </div>`;
     cartTotalText.textContent = "₱0.00";
+    updateCartCheckoutBtn(cart);
     return;
   }
 
@@ -34,7 +74,7 @@ function renderCartPage() {
     const sizeText = item.size === "S" ? "Small" : item.size === "M" ? "Medium" : "Large";
     const moodText = item.mood === "hot" ? "Hot" : "Iced";
     const subtitle = `${sizeText} | ${moodText} | ${item.sugar}`;
-    const lineTotal = item.price * item.qty;
+    const lineTotal = Number(item.price) * Number(item.qty);
 
     return `
       <div class="flex items-center justify-between px-6 py-5 bg-white border-b">
@@ -72,51 +112,40 @@ function renderCartPage() {
     `;
   }).join("");
 
-  const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-  cartTotalText.textContent = peso(total);
+  cartTotalText.textContent = peso(data.total || 0);
+  updateCartCheckoutBtn(cart);
 }
 
-function removeCartItem(id) {
-  const next = getCart().filter(item => item.id !== id);
-  setCart(next);
-  saveCart();
-  renderCartPage();
+async function removeCartItem(id) {
+  try {
+    await api(window.CART_API.remove, {
+      method: "POST",
+      body: JSON.stringify({ id }),
+    });
+    await renderCartPage();
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 function editCartItem(id) {
-  const item = getCart().find(i => i.id === id);
-  if (!item) return;
-
-  localStorage.setItem("editItem", JSON.stringify(item));
-  localStorage.setItem("editReturn", "cart");
-  window.location.href = "/menu/";
-
+  window.location.href = `/menu/?edit=${encodeURIComponent(id)}&return=cart`;
 }
 
-function clearCartPage() {
-  setCart([]);
-  saveCart();
-  localStorage.removeItem("editItem");
-  localStorage.removeItem("editReturn");
-  renderCartPage();
+async function clearCartPage() {
+  try {
+    await api(window.CART_API.clear, {
+      method: "POST",
+      body: JSON.stringify({}),
+    });
+    await renderCartPage();
+  } catch (e) {
+    console.error(e);
+  }
 }
-
-function updateCartCheckoutBtn(cart) {
-  const btn = document.getElementById("cartCheckoutBtn");
-  if (!btn) return;
-
-  const hasItems = cart && cart.length > 0;
-
-  btn.disabled = !hasItems;
-  btn.className = hasItems
-    ? "h-14 w-full rounded-2xl bg-black text-white font-semibold tracking-wide shadow hover:bg-white hover:text-black hover:border hover:border-black transition"
-    : "h-14 w-full rounded-2xl bg-gray-200 text-gray-400 font-semibold tracking-wide cursor-not-allowed";
-}
-
 
 renderCartPage();
 
-// expose for inline onclick if needed
 window.editCartItem = editCartItem;
 window.removeCartItem = removeCartItem;
 window.clearCartPage = clearCartPage;

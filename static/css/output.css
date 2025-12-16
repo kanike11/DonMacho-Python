@@ -1310,3 +1310,46 @@ video {
   @apply bg-[rgb(229,231,235)]
          border-[rgb(156,163,175)];
 }
+/* Base sugar button */
+.sugarBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  font-weight: 800;
+  font-size: 0.875rem;
+  transition: all 0.2s ease-in-out;
+  border-width: 1px;
+}
+
+/* ===== INACTIVE STATES ===== */
+.sugar-25 {
+  color: rgba(255, 128, 0, 0.6);
+  border-color: rgba(255, 128, 0, 0.4);
+}
+
+.sugar-50 {
+  color: rgba(96, 48, 0, 0.6);
+  border-color: rgba(96, 48, 0, 0.4);
+}
+
+.sugar-75 {
+  color: rgba(255, 0, 0, 0.6);
+  border-color: rgba(255, 0, 0, 0.4);
+}
+
+/* ===== ACTIVE STATES ===== */
+.sugar-25.active {
+  background-color: #FF8000;
+  color: #ffffff;
+}
+
+.sugar-50.active {
+  background-color: #603000;
+  color: #ffffff;
+}
+
+.sugar-75.active {
+  background-color: #FF0000;
+  color: #ffffff;
+}

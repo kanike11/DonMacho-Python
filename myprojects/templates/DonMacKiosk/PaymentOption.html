@@ -1,72 +1,51 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Select Payment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  </head>
 
-<body class="min-h-screen bg-[#e9e9e9] text-gray-900">
-
+  <body class="min-h-screen bg-[#e9e9e9] text-gray-900">
     <header class="sticky top-0 z-50 w-full h-44 md:h-48 bg-black text-white overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-r from-[#0b0b0b] via-black to-[#0b0b0b]"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0b0b0b] via-black to-[#0b0b0b]"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent"></div>
 
-    <div class="relative mx-auto max-w-7xl h-full flex items-center justify-between px-10">
-      <div class="shrink-0">
-        <img src="{% static 'myprojects/images/logodonmachos.png' %}" alt="Don Machos Logo"
-          class="w-32 h-32 md:w-36 md:h-36 rounded-full" />
-      </div>
+      <div class="relative mx-auto max-w-7xl h-full flex items-center justify-between px-10">
+        <div class="shrink-0">
+          <img src="{% static 'myprojects/images/logodonmachos.png' %}" alt="Don Machos Logo" class="w-32 h-32 md:w-36 md:h-36 rounded-full" />
+        </div>
 
-      <div class="flex-1 text-center px-8">
-        <h1 class="text-4xl md:text-5xl font-bold leading-none tracking-tight">Your Cup of Happiness</h1>
-        <p class="mt-2 text-[10px] md:text-xs text-gray-300 tracking-[0.22em] uppercase">
-          THE PERFECT CUP, THE PERFECT VIBE. COME EXPERIENCE THE DON MACHOS COMMUNITY.
-        </p>
-      </div>
+        <div class="flex-1 text-center px-8">
+          <h1 class="text-4xl md:text-5xl font-bold leading-none tracking-tight">Your Cup of Happiness</h1>
+          <p class="mt-2 text-[10px] md:text-xs text-gray-300 tracking-[0.22em] uppercase">THE PERFECT CUP, THE PERFECT VIBE. COME EXPERIENCE THE DON MACHOS COMMUNITY.</p>
+        </div>
 
-      <div class="shrink-0 self-end -mb-10 md:-mb-12">
-        <img src="{% static 'myprojects/images/Cupwithhand.png' %}" alt="Don Machos Cup"
-          class="w-40 md:w-52 object-contain" />
+        <div class="shrink-0 self-end -mb-10 md:-mb-12">
+          <img src="{% static 'myprojects/images/Cupwithhand.png' %}" alt="Don Machos Cup" class="w-40 md:w-52 object-contain" />
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
     <!-- CONTENT -->
     <main class="flex items-center justify-center min-h-[calc(100vh-12rem)] px-6">
+      <div class="w-full max-w-3xl">
+        <!-- Section title -->
+        <h2 class="text-2xl md:text-4xl font-extrabold mb-14 text-center">SELECT YOUR PAYMENT OPTION</h2>
 
-        <div class="w-full max-w-3xl">
-
-            <!-- Section title -->
-            <h2 class="text-2xl md:text-4xl font-extrabold mb-14 text-center">
-                SELECT YOUR PAYMENT OPTION
-            </h2>
-
-
-            <!-- Payment options -->
-            <div class="flex justify-center gap-12">
-
-                <!-- Cashier -->
-                <!-- Payment options -->
-                <div class="flex justify-center">
-
-                    <!-- Cashier -->
-                    <button class="w-[28rem] h-72 bg-white rounded-2xl border border-gray-200 shadow-lg 
-               flex items-center justify-center text-4xl font-extrabold tracking-widest
-               hover:shadow-xl hover:-translate-y-1 transition">
-                        CASHIER
-                    </button>
-
-                </div>
-
-
-            </div>
+        <!-- Payment options -->
+        <div class="flex justify-center gap-12">
+          <!-- Cashier -->
+          <!-- Payment options -->
+          <div class="flex justify-center">
+            <!-- Cashier -->
+            <button type="button" onclick="window.location.href='{% url 'myprojects:order_successful' %}'" class="w-[28rem] h-72 bg-white rounded-2xl border border-gray-200 shadow-lg flex items-center justify-center text-4xl font-extrabold tracking-widest hover:shadow-xl hover:-translate-y-1 transition">CASHIER</button>
+          </div>
         </div>
+      </div>
     </main>
-<script src="{% static 'myprojects/JS/include-header.js' %}"></script>
-</body>
-
+    <script src="{% static 'myprojects/JS/include-header.js' %}"></script>
+  </body>
 </html>
